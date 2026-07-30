@@ -1,10 +1,10 @@
-# MindUP 🧠✨
+# MindUP 
 
 > **MindUP** es una plataforma moderna e interactiva diseñada para potenciar la salud mental, la concentración y el bienestar emocional mediante herramientas de biofeedback simulado, meditaciones guiadas, gestión de estado de ánimo y sonido ambiente focalizado.
 
 ---
 
-## 📋 Lista de Verificación del Equipo (Team Readiness Checklist)
+##  Lista de Verificación del Equipo (Team Readiness Checklist)
 
 Para asegurar un desarrollo eficiente y coordinado, el equipo cuenta con:
 
@@ -16,7 +16,7 @@ Para asegurar un desarrollo eficiente y coordinado, el equipo cuenta con:
 
 ---
 
-## 🛠️ Tecnologías Utilizadas
+##  Tecnologías Utilizadas
 
 - **Core**: HTML5 Semántico, JavaScript (ESNext Modules).
 - **Estilos**: CSS Vanilla con CSS Custom Properties (Design System, Flexbox/Grid, Glassmorphism, Micro-interacciones).
@@ -25,7 +25,7 @@ Para asegurar un desarrollo eficiente y coordinado, el equipo cuenta con:
 
 ---
 
-## 📁 Estructura del Proyecto
+##  Estructura del Proyecto
 
 ```text
 mindup/
@@ -42,7 +42,7 @@ mindup/
 
 ---
 
-## 🚀 Guía de Inicio Rápido
+##  Guía de Inicio Rápido
 
 ### Prerrequisitos
 - Node.js (v18 o superior)
@@ -70,7 +70,7 @@ npm run build
 
 ---
 
-## 🌿 Convención de Ramas (Git Branching Model)
+##  Convención de Ramas (Git Branching Model)
 
 - `main`: Código listo para producción.
 - `develop`: Rama principal de integración de funciones.
@@ -79,6 +79,6 @@ npm run build
 
 ---
 
-## 📄 Licencia
+## Licencia
 
 Este proyecto está bajo la Licencia MIT.
