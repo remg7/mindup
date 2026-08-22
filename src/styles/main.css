@@ -367,8 +367,17 @@ body {
   box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
 }
 
-.mood-emoji {
-  font-size: 1.8rem;
+.mood-symbol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-cyan);
+  transition: var(--transition);
+}
+
+.mood-btn:hover .mood-symbol {
+  transform: scale(1.1);
+  color: #fff;
 }
 
 .mood-name {
@@ -379,6 +388,7 @@ body {
 
 .mood-feedback {
   display: flex;
+  align-items: center;
   gap: 1rem;
   background: rgba(255, 255, 255, 0.03);
   padding: 1.25rem;
@@ -387,7 +397,10 @@ body {
 }
 
 .feedback-icon {
-  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-cyan);
 }
 
 .feedback-text strong {
@@ -424,7 +437,10 @@ body {
 }
 
 .sound-icon {
-  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-cyan);
 }
 
 .sound-info {

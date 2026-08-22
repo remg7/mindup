@@ -5,23 +5,23 @@
 // -------------------------------------------------------------
 const MOOD_DATA = {
   increible: {
-    title: "Estado: Increíble 🚀",
+    title: "Estado: Increíble",
     desc: "¡Excelente energía! Aprovecha este momento de alta motivación para atacar desafíos complejos y tomar decisiones estratégicas."
   },
   tranquilo: {
-    title: "Estado: Tranquilo 🌿",
+    title: "Estado: Tranquilo",
     desc: "Ideal para avanzar en tareas que requieren análisis profundo, diseño reflexivo y trabajo creativo sostenido."
   },
   enfocado: {
-    title: "Estado: Enfocado ⚡",
+    title: "Estado: Enfocado",
     desc: "Tu nivel de atención está al máximo. Activa el temporizador Pomodoro y elimina notificaciones para mantener la zona de flujo."
   },
   estresado: {
-    title: "Estado: Estresado 🌊",
+    title: "Estado: Estresado",
     desc: "Tómate 2 minutos para realizar la sesión de Respiración Guiada (4-7-8). Reorganiza tus prioridades antes de continuar."
   },
   agotado: {
-    title: "Estado: Agotado 🔋",
+    title: "Estado: Agotado",
     desc: "Es momento de recargar. Realiza una pausa corta, camina 5 minutos y bebe agua. La salud cognitiva es tu prioridad."
   }
 };

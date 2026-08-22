@@ -87,29 +87,41 @@
 
             <div class="mood-selector">
               <button class="mood-btn" data-mood="increible">
-                <span class="mood-emoji">🚀</span>
+                <span class="mood-symbol">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                </span>
                 <span class="mood-name">Increíble</span>
               </button>
               <button class="mood-btn active" data-mood="tranquilo">
-                <span class="mood-emoji">🌿</span>
+                <span class="mood-symbol">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A9 9 0 0 1 2 11 9 9 0 0 1 11 2c6 0 11 5 11 11a9 9 0 0 1-11 7z"/><path d="M2 21c5-5 9-10 9-19"/></svg>
+                </span>
                 <span class="mood-name">Tranquilo</span>
               </button>
               <button class="mood-btn" data-mood="enfocado">
-                <span class="mood-emoji">⚡</span>
+                <span class="mood-symbol">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                </span>
                 <span class="mood-name">Enfocado</span>
               </button>
               <button class="mood-btn" data-mood="estresado">
-                <span class="mood-emoji">🌊</span>
+                <span class="mood-symbol">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg>
+                </span>
                 <span class="mood-name">Estresado</span>
               </button>
               <button class="mood-btn" data-mood="agotado">
-                <span class="mood-emoji">🔋</span>
+                <span class="mood-symbol">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="16" height="10" rx="2"/><line x1="22" y1="11" x2="22" y2="13"/><line x1="6" y1="11" x2="6" y2="13"/></svg>
+                </span>
                 <span class="mood-name">Agotado</span>
               </button>
             </div>
 
             <div class="mood-feedback" id="mood-feedback-box">
-              <div class="feedback-icon">💡</div>
+              <div class="feedback-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M15 9A6 6 0 0 0 3 9c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26C15.81 13.47 17 11.38 17 9z"/></svg>
+              </div>
               <div class="feedback-text">
                 <strong id="mood-title">Estado: Tranquilo</strong>
                 <p id="mood-desc">Ideal para avanzar en tareas que requieren análisis profundo y trabajo creativo sostenido.</p>
@@ -124,7 +136,9 @@
 
             <div class="soundscape-list">
               <div class="sound-item" data-sound="rain">
-                <div class="sound-icon">🌧️</div>
+                <div class="sound-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.8A7 7 0 0 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.2M8 19v2M12 17v4M16 19v2"/></svg>
+                </div>
                 <div class="sound-info">
                   <strong>Lluvia Suave</strong>
                   <span>Frecuencia alfa para concentración</span>
@@ -132,7 +146,9 @@
                 <button class="play-btn" data-sound="rain">▶</button>
               </div>
               <div class="sound-item" data-sound="waves">
-                <div class="sound-icon">🌊</div>
+                <div class="sound-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg>
+                </div>
                 <div class="sound-info">
                   <strong>Olas del Mar</strong>
                   <span>Ritmo relajante para calmar la mente</span>
@@ -140,7 +156,9 @@
                 <button class="play-btn" data-sound="waves">▶</button>
               </div>
               <div class="sound-item" data-sound="forest">
-                <div class="sound-icon">🌲</div>
+                <div class="sound-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 14h5l-3 6h12l-3-6h5L12 2zM12 20v2"/></svg>
+                </div>
                 <div class="sound-info">
                   <strong>Bosque Zen</strong>
                   <span>Pájaros y brisa fresca</span>
@@ -241,7 +259,9 @@
       <div class="modal-card glass">
         <div class="modal-header">
           <div>
-            <h2>🚀 Lista de Verificación: Equipo Listo</h2>
+            <h2>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: sub; margin-right: 8px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Lista de Verificación: Equipo Listo
+            </h2>
             <p class="subtext">Estado de preparación del repositorio y arquitectura del proyecto MindUP</p>
           </div>
           <button id="close-modal-btn" class="close-btn">&times;</button>
