@@ -1,4 +1,5 @@
 // MindUP Application Logic
+import { fetchJournalEntries, saveJournalEntry, saveMoodLog, isSupabaseConfigured } from './lib/supabase.js';
 
 // -------------------------------------------------------------
 // Mood Config & Descriptions
@@ -51,14 +52,7 @@ let state = {
     waves: false,
     forest: false
   },
-  journalEntries: [
-    {
-      id: 1,
-      title: "Inicio del Proyecto MindUP",
-      content: "Repositorio en Git listo con su initial commit. La arquitectura base y el sistema de diseño están completamente configurados.",
-      time: "Hoy, hace 10 min"
-    }
-  ]
+  journalEntries: []
 };
 
 // -------------------------------------------------------------
@@ -169,18 +163,31 @@ function initMoodSelector() {
   const moodTitle = document.getElementById('mood-title');
   const moodDesc = document.getElementById('mood-desc');
 
+  // Cargar estado de ánimo guardado si existe
+  const savedMood = localStorage.getItem('mindup_mood');
+  if (savedMood && MOOD_DATA[savedMood]) {
+    state.currentMood = savedMood;
+    moodBtns.forEach(b => b.classList.toggle('active', b.getAttribute('data-mood') === savedMood));
+    moodTitle.textContent = MOOD_DATA[savedMood].title;
+    moodDesc.textContent = MOOD_DATA[savedMood].desc;
+  }
+
   moodBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', async () => {
       moodBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
       const moodKey = btn.getAttribute('data-mood');
       state.currentMood = moodKey;
+      localStorage.setItem('mindup_mood', moodKey);
 
       if (MOOD_DATA[moodKey]) {
         moodTitle.textContent = MOOD_DATA[moodKey].title;
         moodDesc.textContent = MOOD_DATA[moodKey].desc;
       }
+
+      // Guardar en Supabase (si está configurado)
+      await saveMoodLog(moodKey);
     });
   });
 }
@@ -354,7 +361,7 @@ function initBreathing() {
 // -------------------------------------------------------------
 // Daily Mindful Journal
 // -------------------------------------------------------------
-function initJournal() {
+async function initJournal() {
   const form = document.getElementById('journal-form');
   const titleInput = document.getElementById('journal-title');
   const contentInput = document.getElementById('journal-content');
@@ -362,6 +369,10 @@ function initJournal() {
 
   function renderEntries() {
     entriesList.innerHTML = '';
+    if (state.journalEntries.length === 0) {
+      entriesList.innerHTML = '<div class="empty-state" style="text-align: center; padding: 1.5rem 1rem; color: var(--text-muted); font-size: 0.9rem; font-style: italic;">No hay entradas aún. Escribe tu primera reflexión arriba para comenzar.</div>';
+      return;
+    }
     state.journalEntries.forEach(entry => {
       const item = document.createElement('div');
       item.className = 'journal-item';
@@ -374,7 +385,26 @@ function initJournal() {
     });
   }
 
-  form.addEventListener('submit', (e) => {
+  // Cargar desde Supabase o localStorage al iniciar
+  if (isSupabaseConfigured()) {
+    const remoteEntries = await fetchJournalEntries();
+    if (remoteEntries && remoteEntries.length > 0) {
+      state.journalEntries = remoteEntries;
+    }
+  } else {
+    const localSaved = localStorage.getItem('mindup_journal_entries');
+    if (localSaved) {
+      try {
+        state.journalEntries = JSON.parse(localSaved);
+      } catch (e) {
+        console.warn('Error parsing local journal entries:', e);
+      }
+    }
+  }
+
+  renderEntries();
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const title = titleInput.value.trim();
     const content = contentInput.value.trim();
@@ -390,10 +420,14 @@ function initJournal() {
       state.journalEntries.unshift(newEntry);
       renderEntries();
       form.reset();
+
+      // Guardar localmente
+      localStorage.setItem('mindup_journal_entries', JSON.stringify(state.journalEntries));
+
+      // Guardar en Supabase
+      await saveJournalEntry({ title, content });
     }
   });
-
-  renderEntries();
 }
 
 function escapeHtml(text) {
