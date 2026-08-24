@@ -244,8 +244,6 @@ function initPomodoroTimer() {
     if (state.timer.isRunning) return;
 
     state.timer.isRunning = true;
-    startBtn.disabled = true;
-    pauseBtn.disabled = false;
 
     state.timer.intervalId = setInterval(() => {
       if (state.timer.remainingSeconds > 0) {
@@ -265,8 +263,6 @@ function initPomodoroTimer() {
 
     clearInterval(state.timer.intervalId);
     state.timer.isRunning = false;
-    startBtn.disabled = false;
-    pauseBtn.disabled = true;
   }
 
   function resetTimer() {
@@ -293,8 +289,17 @@ function initPomodoroTimer() {
     });
   });
 
-  startBtn.addEventListener('click', startTimer);
-  pauseBtn.addEventListener('click', pauseTimer);
+  startBtn.addEventListener('click', () => {
+    if (state.timer.isRunning) {
+      pauseTimer();
+      startBtn.className = "btn-primary";
+      startBtn.textContent = "Iniciar Enfoque";
+    } else {
+      startTimer();
+      startBtn.className = "btn-secondary";
+      startBtn.textContent = "Detener Enfoque";
+    }
+  });
   resetBtn.addEventListener('click', resetTimer);
 
   updateDisplay();
