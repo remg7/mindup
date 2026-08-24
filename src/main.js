@@ -304,8 +304,7 @@ function initPomodoroTimer() {
 // Guided Breathing (4-7-8)
 // -------------------------------------------------------------
 function initBreathing() {
-  const startBtn = document.getElementById('start-breathing');
-  const stopBtn = document.getElementById('stop-breathing');
+  const breathingBtn = document.getElementById('breathing-btn');
   const breathCircle = document.getElementById('breath-circle');
   const breathText = breathCircle.querySelector('span');
 
@@ -341,20 +340,20 @@ function initBreathing() {
     }, 4000);
   }
 
-  startBtn.addEventListener('click', () => {
-    state.breathing.active = true;
-    startBtn.disabled = true;
-    stopBtn.disabled = false;
-    runBreathingCycle();
-  });
-
-  stopBtn.addEventListener('click', () => {
-    state.breathing.active = false;
-    clearTimeout(state.breathing.timeoutId);
-    startBtn.disabled = false;
-    stopBtn.disabled = true;
-    breathCircle.className = "breath-circle";
-    breathText.textContent = "Presiona Iniciar";
+  breathingBtn.addEventListener('click', () => {
+    if (!state.breathing.active) {
+      state.breathing.active = true;
+      breathingBtn.className = "btn-secondary";
+      breathingBtn.textContent = "Detener Ejercicio";
+      runBreathingCycle();
+    } else {
+      state.breathing.active = false;
+      breathingBtn.className = "btn-primary";
+      breathingBtn.textContent = "Iniciar Ejercicio";
+      clearTimeout(state.breathing.timeoutId);
+      breathCircle.className = "breath-circle";
+      breathText.textContent = "Presiona Iniciar";
+    }
   });
 }
 
