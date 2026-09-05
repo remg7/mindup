@@ -1,0 +1,229 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 950" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradients -->
+    <radialGradient id="bgGlow1" cx="20%" cy="15%" r="50%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#0d1117" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="bgGlow2" cx="80%" cy="85%" r="50%">
+      <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#0d1117" stop-opacity="0" />
+    </radialGradient>
+
+    <linearGradient id="gradHeader" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#00f2fe" />
+    </linearGradient>
+
+    <!-- Card Shadow -->
+    <filter id="editorShadow" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.65" />
+    </filter>
+  </defs>
+
+  <style>
+    .font-title { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-weight: 700; }
+    .font-body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
+    .font-code { font-family: 'Fira Code', 'Cascadia Code', Consolas, Monaco, monospace; font-size: 13px; line-height: 22px; }
+    
+    .ln { fill: #484f58; text-anchor: end; user-select: none; }
+    .kwd { fill: #ff7b72; font-weight: 600; }
+    .typ { fill: #ffa657; }
+    .fn { fill: #d2a8ff; }
+    .str { fill: #a5d6ff; }
+    .cmt { fill: #8b949e; font-style: italic; }
+    .txt { fill: #f0f6fc; }
+    .num { fill: #79c0ff; }
+    .op { fill: #79c0ff; }
+    .prop { fill: #7ee787; }
+  </style>
+
+  <!-- Background Base -->
+  <rect width="1400" height="950" fill="#0d1117" />
+  <rect width="1400" height="950" fill="url(#bgGlow1)" />
+  <rect width="1400" height="950" fill="url(#bgGlow2)" />
+
+  <!-- HEADER -->
+  <g transform="translate(60, 35)">
+    <rect x="0" y="0" width="48" height="48" rx="14" fill="#161b22" stroke="rgba(16, 185, 129, 0.4)" stroke-width="1.5" />
+    <path d="M24 10 a14 14 0 0 1 14 14 c0 7.732-6.268 14-14 14 S10 31.732 10 24 16.268 10 24 10 z" fill="none" stroke="url(#gradHeader)" stroke-width="3" />
+    <path d="M24 17 v7 l5 3" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" />
+
+    <text x="64" y="24" class="font-title" fill="#f0f6fc" font-size="22">Mind<tspan fill="#10b981">UP</tspan> — Buenas Prácticas &amp; Código Legible (Clean Code)</text>
+    <text x="64" y="44" class="font-body" fill="#8b949e" font-size="13">Archivo: <tspan fill="#10b981">src/lib/rbac.js</tspan> • Principio SRP, Inmutabilidad (Object.freeze), Nombres Descriptivos y Tipado</text>
+
+    <!-- Badges in Header -->
+    <g transform="translate(930, 8)">
+      <rect x="0" y="0" width="165" height="32" rx="16" fill="rgba(16, 185, 129, 0.12)" stroke="#10b981" stroke-width="1" />
+      <circle cx="16" cy="16" r="4" fill="#10b981" />
+      <text x="28" y="20" class="font-title" fill="#10b981" font-size="11">✨ CLEAN CODE (SRP)</text>
+
+      <rect x="175" y="0" width="180" height="32" rx="16" fill="rgba(0, 242, 254, 0.12)" stroke="#00f2fe" stroke-width="1" />
+      <circle cx="191" cy="16" r="4" fill="#00f2fe" />
+      <text x="203" y="20" class="font-title" fill="#00f2fe" font-size="11">🔒 INMUTABILIDAD</text>
+    </g>
+  </g>
+
+  <!-- CODE EDITOR WINDOW -->
+  <g transform="translate(60, 110)" filter="url(#editorShadow)">
+    <!-- Window Frame -->
+    <rect width="1280" height="780" rx="14" fill="#161b22" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.5" />
+
+    <!-- Window Topbar -->
+    <path d="M 0 14 Q 0 0 14 0 L 1266 0 Q 1280 0 1280 14 L 1280 44 L 0 44 Z" fill="#0d1117" />
+    <line x1="0" y1="44" x2="1280" y2="44" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+
+    <!-- Traffic Lights -->
+    <circle cx="24" cy="22" r="6" fill="#ff5f56" />
+    <circle cx="44" cy="22" r="6" fill="#ffbd2e" />
+    <circle cx="64" cy="22" r="6" fill="#27c93f" />
+
+    <!-- Tab -->
+    <g transform="translate(95, 8)">
+      <rect width="180" height="36" rx="8" fill="#161b22" stroke="rgba(16, 185, 129, 0.3)" stroke-width="1" />
+      <circle cx="20" cy="18" r="4" fill="#10b981" />
+      <text x="32" y="22" class="font-title" fill="#f0f6fc" font-size="12">src/lib/rbac.js</text>
+      <path d="M 160 14 L 168 22 M 168 14 L 160 22" stroke="#8b949e" stroke-width="1.5" />
+    </g>
+
+    <!-- Side Highlight Badges -->
+    <g transform="translate(980, 70)">
+      <rect width="270" height="110" rx="10" fill="#0d1117" stroke="rgba(16, 185, 129, 0.3)" stroke-width="1" />
+      <text x="16" y="24" class="font-title" fill="#10b981" font-size="12">A. INMUTABILIDAD &amp; CONSTANTES</text>
+      <text x="16" y="48" class="font-body" fill="#8b949e" font-size="11">Uso de <tspan fill="#f0f6fc">Object.freeze()</tspan> para</text>
+      <text x="16" y="66" class="font-body" fill="#8b949e" font-size="11">prevenir mutaciones accidentales.</text>
+      <text x="16" y="90" class="font-body" fill="#10b981" font-size="11">✔ Seguridad en tiempo de ejecución</text>
+    </g>
+
+    <g transform="translate(980, 200)">
+      <rect width="270" height="135" rx="10" fill="#0d1117" stroke="rgba(0, 242, 254, 0.3)" stroke-width="1" />
+      <text x="16" y="24" class="font-title" fill="#00f2fe" font-size="12">B. CÓDIGO AUTODOCUMENTADO</text>
+      <text x="16" y="48" class="font-body" fill="#8b949e" font-size="11">Nombres descriptivos y claros:</text>
+      <text x="16" y="68" class="font-code" fill="#a5d6ff" font-size="11">tienePermiso(rol, permiso)</text>
+      <text x="16" y="92" class="font-body" fill="#8b949e" font-size="11">Cualquier desarrollador entiende</text>
+      <text x="16" y="110" class="font-body" fill="#8b949e" font-size="11">el propósito sin adivinar.</text>
+    </g>
+
+    <g transform="translate(980, 355)">
+      <rect width="270" height="135" rx="10" fill="#0d1117" stroke="rgba(192, 132, 252, 0.3)" stroke-width="1" />
+      <text x="16" y="24" class="font-title" fill="#c084fc" font-size="12">C. RESPONSABILIDAD ÚNICA</text>
+      <text x="16" y="48" class="font-body" fill="#8b949e" font-size="11">Módulo 100% independiente:</text>
+      <text x="16" y="68" class="font-body" fill="#8b949e" font-size="11">No mezcla manipulación del DOM</text>
+      <text x="16" y="86" class="font-body" fill="#8b949e" font-size="11">ni llamadas de red directas.</text>
+      <text x="16" y="110" class="font-body" fill="#10b981" font-size="11">✔ Fácil de testear con Unit Tests</text>
+    </g>
+
+    <g transform="translate(980, 510)">
+      <rect width="270" height="145" rx="10" fill="#0d1117" stroke="rgba(245, 158, 11, 0.3)" stroke-width="1" />
+      <text x="16" y="24" class="font-title" fill="#f59e0b" font-size="12">D. MATRIZ RBAC DECLARATIVA</text>
+      <text x="16" y="48" class="font-body" fill="#8b949e" font-size="11">Configuración centralizada:</text>
+      <text x="16" y="68" class="font-body" fill="#8b949e" font-size="11">Agregar o modificar un rol o</text>
+      <text x="16" y="86" class="font-body" fill="#8b949e" font-size="11">permiso solo requiere editar</text>
+      <text x="16" y="104" class="font-body" fill="#8b949e" font-size="11">un objeto estructurado.</text>
+      <text x="16" y="128" class="font-body" fill="#10b981" font-size="11">✔ Escalabilidad y Mantenibilidad</text>
+    </g>
+
+    <!-- Code Content Area -->
+    <g transform="translate(30, 75)" class="font-code">
+      <!-- Line Numbers & Code Lines -->
+      <text x="25" y="0" class="ln">1</text>
+      <text x="45" y="0"><tspan class="cmt">// 1. ENUMERACIÓN INMUTABLE DE LOS 3 ROLES</tspan></text>
+
+      <text x="25" y="22" class="ln">2</text>
+      <text x="45" y="22"><tspan class="kwd">export const</tspan><tspan class="typ"> ROLES </tspan><tspan class="op">=</tspan><tspan class="txt"> Object.</tspan><tspan class="fn">freeze</tspan><tspan class="txt">({</tspan></text>
+
+      <text x="25" y="44" class="ln">3</text>
+      <text x="45" y="44"><tspan class="txt">  ADMIN: </tspan><tspan class="str">'admin'</tspan><tspan class="txt">,</tspan></text>
+
+      <text x="25" y="66" class="ln">4</text>
+      <text x="45" y="66"><tspan class="txt">  USUARIO: </tspan><tspan class="str">'usuario'</tspan><tspan class="txt">,</tspan></text>
+
+      <text x="25" y="88" class="ln">5</text>
+      <text x="45" y="88"><tspan class="txt">  AUDITOR: </tspan><tspan class="str">'auditor'</tspan></text>
+
+      <text x="25" y="110" class="ln">6</text>
+      <text x="45" y="110"><tspan class="txt">});</tspan></text>
+
+      <text x="25" y="132" class="ln">7</text>
+      <text x="45" y="132"></text>
+
+      <text x="25" y="154" class="ln">8</text>
+      <text x="45" y="154"><tspan class="cmt">// 2. MATRIZ DE PERMISOS POR ROL (RBAC)</tspan></text>
+
+      <text x="25" y="176" class="ln">9</text>
+      <text x="45" y="176"><tspan class="kwd">export const</tspan><tspan class="typ"> MATRIZ_PERMISOS </tspan><tspan class="op">=</tspan><tspan class="txt"> Object.</tspan><tspan class="fn">freeze</tspan><tspan class="txt">({</tspan></text>
+
+      <text x="25" y="198" class="ln">10</text>
+      <text x="45" y="198"><tspan class="txt">  [</tspan><tspan class="prop">ROLES.ADMIN</tspan><tspan class="txt">]: [</tspan><tspan class="str">'diario:crear'</tspan><tspan class="txt">, </tspan><tspan class="str">'diario:leer_todos'</tspan><tspan class="txt">, </tspan><tspan class="str">'usuarios:gestionar'</tspan><tspan class="txt">],</tspan></text>
+
+      <text x="25" y="220" class="ln">11</text>
+      <text x="45" y="220"><tspan class="txt">  [</tspan><tspan class="prop">ROLES.USUARIO</tspan><tspan class="txt">]: [</tspan><tspan class="str">'diario:crear'</tspan><tspan class="txt">, </tspan><tspan class="str">'diario:leer_propio'</tspan><tspan class="txt">],</tspan></text>
+
+      <text x="25" y="242" class="ln">12</text>
+      <text x="45" y="242"><tspan class="txt">  [</tspan><tspan class="prop">ROLES.AUDITOR</tspan><tspan class="txt">]: [</tspan><tspan class="str">'diario:leer_todos'</tspan><tspan class="txt">, </tspan><tspan class="str">'auditoria:ver_logs'</tspan><tspan class="txt">] </tspan><tspan class="cmt">// Solo lectura</tspan></text>
+
+      <text x="25" y="264" class="ln">13</text>
+      <text x="45" y="264"><tspan class="txt">});</tspan></text>
+
+      <text x="25" y="286" class="ln">14</text>
+      <text x="45" y="286"></text>
+
+      <text x="25" y="308" class="ln">15</text>
+      <text x="45" y="308"><tspan class="cmt">/**</tspan></text>
+
+      <text x="25" y="330" class="ln">16</text>
+      <text x="45" y="330"><tspan class="cmt"> * Valida si un rol tiene un permiso determinado (Función Pura)</tspan></text>
+
+      <text x="25" y="352" class="ln">17</text>
+      <text x="45" y="352"><tspan class="cmt"> */</tspan></text>
+
+      <text x="25" y="374" class="ln">18</text>
+      <text x="45" y="374"><tspan class="kwd">export function</tspan><tspan class="fn"> tienePermiso</tspan><tspan class="txt">(rol, permiso) {</tspan></text>
+
+      <text x="25" y="396" class="ln">19</text>
+      <text x="45" y="396"><tspan class="txt">  </tspan><tspan class="kwd">if</tspan><tspan class="txt"> (!rol </tspan><tspan class="op">||</tspan><tspan class="txt"> !</tspan><tspan class="typ">MATRIZ_PERMISOS</tspan><tspan class="txt">[rol]) </tspan><tspan class="kwd">return false</tspan><tspan class="txt">;</tspan></text>
+
+      <text x="25" y="418" class="ln">20</text>
+      <text x="45" y="418"><tspan class="txt">  </tspan><tspan class="kwd">return</tspan><tspan class="typ"> MATRIZ_PERMISOS</tspan><tspan class="txt">[rol].</tspan><tspan class="fn">includes</tspan><tspan class="txt">(permiso);</tspan></text>
+
+      <text x="25" y="440" class="ln">21</text>
+      <text x="45" y="440"><tspan class="txt">}</tspan></text>
+
+      <text x="25" y="462" class="ln">22</text>
+      <text x="45" y="462"></text>
+
+      <text x="25" y="484" class="ln">23</text>
+      <text x="45" y="484"><tspan class="cmt">/**</tspan></text>
+
+      <text x="25" y="506" class="ln">24</text>
+      <text x="45" y="506"><tspan class="cmt"> * Obtiene metadatos de UI para etiquetas y badges</tspan></text>
+
+      <text x="25" y="528" class="ln">25</text>
+      <text x="45" y="528"><tspan class="cmt"> */</tspan></text>
+
+      <text x="25" y="550" class="ln">26</text>
+      <text x="45" y="550"><tspan class="kwd">export function</tspan><tspan class="fn"> obtenerMetadatosRol</tspan><tspan class="txt">(rol) {</tspan></text>
+
+      <text x="25" y="572" class="ln">27</text>
+      <text x="45" y="572"><tspan class="txt">  </tspan><tspan class="kwd">const</tspan><tspan class="txt"> metadatos </tspan><tspan class="op">=</tspan><tspan class="txt"> {</tspan></text>
+
+      <text x="25" y="594" class="ln">28</text>
+      <text x="45" y="594"><tspan class="txt">    [</tspan><tspan class="prop">ROLES.ADMIN</tspan><tspan class="txt">]: { etiqueta: </tspan><tspan class="str">'Admin'</tspan><tspan class="txt">, color: </tspan><tspan class="str">'#00f2fe'</tspan><tspan class="txt">, puedeEscribir: </tspan><tspan class="kwd">true</tspan><tspan class="txt"> },</tspan></text>
+
+      <text x="25" y="616" class="ln">29</text>
+      <text x="45" y="616"><tspan class="txt">    [</tspan><tspan class="prop">ROLES.USUARIO</tspan><tspan class="txt">]: { etiqueta: </tspan><tspan class="str">'Usuario'</tspan><tspan class="txt">, color: </tspan><tspan class="str">'#10b981'</tspan><tspan class="txt">, puedeEscribir: </tspan><tspan class="kwd">true</tspan><tspan class="txt"> },</tspan></text>
+
+      <text x="25" y="638" class="ln">30</text>
+      <text x="45" y="638"><tspan class="txt">    [</tspan><tspan class="prop">ROLES.AUDITOR</tspan><tspan class="txt">]: { etiqueta: </tspan><tspan class="str">'Auditor'</tspan><tspan class="txt">, color: </tspan><tspan class="str">'#c084fc'</tspan><tspan class="txt">, puedeEscribir: </tspan><tspan class="kwd">false</tspan><tspan class="txt"> }</tspan></text>
+
+      <text x="25" y="660" class="ln">31</text>
+      <text x="45" y="660"><tspan class="txt">  };</tspan></text>
+
+      <text x="25" y="682" class="ln">32</text>
+      <text x="45" y="682"><tspan class="txt">  </tspan><tspan class="kwd">return</tspan><tspan class="txt"> metadatos[rol] </tspan><tspan class="op">||</tspan><tspan class="txt"> { etiqueta: </tspan><tspan class="str">'Invitado'</tspan><tspan class="txt">, puedeEscribir: </tspan><tspan class="kwd">false</tspan><tspan class="txt"> };</tspan></text>
+
+      <text x="25" y="704" class="ln">33</text>
+      <text x="45" y="704"><tspan class="txt">}</tspan></text>
+    </g>
+  </g>
+</svg>

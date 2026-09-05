@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindUP — Diagramas de Base de Datos (2FN)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0d1117;
+      --bg-secondary: #161b22;
+      --border-glass: rgba(255, 255, 255, 0.1);
+      --accent-cyan: #00f2fe;
+      --accent-blue: #4facfe;
+      --accent-purple: #9b51e0;
+      --accent-emerald: #10b981;
+      --text-primary: #f0f6fc;
+      --text-secondary: #8b949e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      padding: 2rem;
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(79, 172, 254, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(155, 81, 224, 0.1) 0%, transparent 40%);
+    }
+    .container { max-width: 1400px; margin: 0 auto; }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-glass);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    h1 { font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 700; }
+    h1 span { color: var(--accent-cyan); }
+    .subtitle { color: var(--text-secondary); font-size: 0.95rem; margin-top: 0.3rem; }
+    .nav-tabs { display: flex; gap: 0.75rem; }
+    .tab-btn {
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-glass);
+      padding: 0.6rem 1.2rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+    .tab-btn.active, .tab-btn:hover {
+      color: #fff;
+      border-color: var(--accent-cyan);
+      background: rgba(0, 242, 254, 0.1);
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
+    }
+    .diagram-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-glass);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      margin-bottom: 2.5rem;
+    }
+    .card-top {
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.02);
+      border-bottom: 1px solid var(--border-glass);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .card-title h2 { font-family: 'Outfit', sans-serif; font-size: 1.3rem; }
+    .card-title p { color: var(--text-secondary); font-size: 0.85rem; }
+    .actions { display: flex; gap: 0.75rem; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-cyan) 100%);
+      color: #000;
+    }
+    .btn-primary:hover {
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-primary);
+      border-color: var(--border-glass);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .image-preview {
+      width: 100%;
+      padding: 1.5rem;
+      background: #0d1117;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .image-preview img, .image-preview svg {
+      width: 100%;
+      height: auto;
+      max-height: 850px;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>Mind<span>UP</span> — Diagramas de Base de Datos (2FN)</h1>
+        <p class="subtitle">Modelo Entidad-Relación (Relacional) y Diagrama de Clases (No Relacional) con los colores de MindUP</p>
+      </div>
+      <div class="nav-tabs">
+        <button class="tab-btn active" onclick="switchView('er')">Modelo ER (2FN)</button>
+        <button class="tab-btn" onclick="switchView('clases')">Clases NoSQL (2FN)</button>
+        <button class="tab-btn" onclick="switchView('roles-sql')">Código: Roles &amp; RLS</button>
+        <button class="tab-btn" onclick="switchView('clean-code')">Código: Buenas Prácticas</button>
+        <button class="tab-btn" onclick="switchView('all')">Ver Todo</button>
+      </div>
+    </header>
+
+    <!-- Section 1: Modelo ER Relacional -->
+    <div id="section-er" class="diagram-card">
+      <div class="card-top">
+        <div class="card-title">
+          <h2>1. Modelo Entidad-Relación (BD Relacional en 2FN)</h2>
+          <p>Cumple 1FN y 2FN • Claves Primarias (PK), Foráneas (FK) y Catálogos Desacoplados</p>
+        </div>
+        <div class="actions">
+          <button class="btn btn-primary" onclick="downloadPNG('/public/images/modelo_er_2fn.svg', 'MindUP_Modelo_ER_2FN.png', 3200, 2000)">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            Descargar Imagen PNG (HD)
+          </button>
+          <a href="/public/images/modelo_er_2fn.svg" download="MindUP_Modelo_ER_2FN.svg" class="btn btn-secondary">
+            Descargar SVG
+          </a>
+          <a href="/public/images/modelo_er_2fn.svg" target="_blank" class="btn btn-secondary">
+            Abrir en Pestaña
+          </a>
+        </div>
+      </div>
+      <div class="image-preview">
+        <img id="img-er" src="/public/images/modelo_er_2fn.svg" alt="Modelo Entidad-Relación MindUP 2FN">
+      </div>
+    </div>
+
+    <!-- Section 2: Diagrama de Clases NoSQL -->
+    <div id="section-clases" class="diagram-card">
+      <div class="card-top">
+        <div class="card-title">
+          <h2>2. Diagrama de Clases / Documentos (BD No Relacional en 2FN)</h2>
+          <p>Estructura UML, Colecciones NoSQL, Modelos de Dominio y Métodos</p>
+        </div>
+        <div class="actions">
+          <button class="btn btn-primary" onclick="downloadPNG('/public/images/diagrama_clases_nosql.svg', 'MindUP_Diagrama_Clases_NoSQL_2FN.png', 3200, 2100)">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            Descargar Imagen PNG (HD)
+          </button>
+          <a href="/public/images/diagrama_clases_nosql.svg" download="MindUP_Diagrama_Clases_NoSQL_2FN.svg" class="btn btn-secondary">
+            Descargar SVG
+          </a>
+          <a href="/public/images/diagrama_clases_nosql.svg" target="_blank" class="btn btn-secondary">
+            Abrir en Pestaña
+          </a>
+        </div>
+      </div>
+      <div class="image-preview">
+        <img id="img-clases" src="/public/images/diagrama_clases_nosql.svg" alt="Diagrama de Clases UML MindUP 2FN">
+      </div>
+    <!-- Section 3: Código de Roles & RLS -->
+    <div id="section-roles-sql" class="diagram-card hidden">
+      <div class="card-top">
+        <div class="card-title">
+          <h2>3. Código: Definición de 3 Roles y Políticas RLS (PostgreSQL / Supabase)</h2>
+          <p>Roles (Admin, Usuario, Auditor) • Row Level Security • Funciones de Verificación y Permisos</p>
+        </div>
+        <div class="actions">
+          <button class="btn btn-primary" onclick="downloadPNG('/public/images/codigo_roles_sql.svg', 'MindUP_Codigo_Roles_RLS.png', 2800, 1900)">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            Descargar Imagen PNG (HD)
+          </button>
+          <a href="/public/images/codigo_roles_sql.svg" download="MindUP_Codigo_Roles_RLS.svg" class="btn btn-secondary">
+            Descargar SVG
+          </a>
+          <a href="/public/images/codigo_roles_sql.svg" target="_blank" class="btn btn-secondary">
+            Abrir en Pestaña
+          </a>
+        </div>
+      </div>
+      <div class="image-preview">
+        <img id="img-roles-sql" src="/public/images/codigo_roles_sql.svg" alt="Código SQL de Roles y RLS MindUP">
+      </div>
+    </div>
+
+    <!-- Section 4: Código de Buenas Prácticas & Clean Code -->
+    <div id="section-clean-code" class="diagram-card hidden">
+      <div class="card-top">
+        <div class="card-title">
+          <h2>4. Código: Buenas Prácticas, Inmutabilidad y Clean Code (JavaScript RBAC)</h2>
+          <p>Principio SRP • Object.freeze • Nombres Descriptivos • Matriz Declarativa de Permisos</p>
+        </div>
+        <div class="actions">
+          <button class="btn btn-primary" onclick="downloadPNG('/public/images/codigo_buenas_practicas_rbac.svg', 'MindUP_Codigo_Buenas_Practicas_RBAC.png', 2800, 1900)">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            Descargar Imagen PNG (HD)
+          </button>
+          <a href="/public/images/codigo_buenas_practicas_rbac.svg" download="MindUP_Codigo_Buenas_Practicas_RBAC.svg" class="btn btn-secondary">
+            Descargar SVG
+          </a>
+          <a href="/public/images/codigo_buenas_practicas_rbac.svg" target="_blank" class="btn btn-secondary">
+            Abrir en Pestaña
+          </a>
+        </div>
+      </div>
+      <div class="image-preview">
+        <img id="img-clean-code" src="/public/images/codigo_buenas_practicas_rbac.svg" alt="Código JavaScript Buenas Prácticas MindUP">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function switchView(tab) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      const secER = document.getElementById('section-er');
+      const secClases = document.getElementById('section-clases');
+      const secRoles = document.getElementById('section-roles-sql');
+      const secClean = document.getElementById('section-clean-code');
+      
+      const allSections = [secER, secClases, secRoles, secClean];
+      allSections.forEach(s => s.classList.add('hidden'));
+
+      if (tab === 'er') {
+        secER.classList.remove('hidden');
+      } else if (tab === 'clases') {
+        secClases.classList.remove('hidden');
+      } else if (tab === 'roles-sql') {
+        secRoles.classList.remove('hidden');
+      } else if (tab === 'clean-code') {
+        secClean.classList.remove('hidden');
+      } else {
+        allSections.forEach(s => s.classList.remove('hidden'));
+      }
+    }
+
+    async function downloadPNG(svgUrl, filename, width, height) {
+      try {
+        const response = await fetch(svgUrl);
+        const svgText = await response.text();
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(svgText, "image/svg+xml");
+        const svgElement = xmlDoc.documentElement;
+        
+        const blob = new Blob([svgText], { type: 'image/svg+xml;charset=utf-8' });
+        const URL = window.URL || window.webkitURL || window;
+        const blobURL = URL.createObjectURL(blob);
+        
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          canvas.width = width || 3200;
+          canvas.height = height || 2000;
+          const ctx = canvas.getContext('2d');
+          ctx.fillStyle = '#0d1117';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          
+          canvas.toBlob((pngBlob) => {
+            const pngURL = URL.createObjectURL(pngBlob);
+            const a = document.createElement('a');
+            a.href = pngURL;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(pngURL);
+            URL.revokeObjectURL(blobURL);
+          }, 'image/png');
+        };
+        img.src = blobURL;
+      } catch (err) {
+        console.error('Error generando PNG:', err);
+        // Fallback direct download
+        const a = document.createElement('a');
+        a.href = svgUrl;
+        a.download = filename.replace('.png', '.svg');
+        a.click();
+      }
+    }
+  </script>
+</body>
+</html>
